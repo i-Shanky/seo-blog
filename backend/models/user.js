@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-import crypto from 'crypto';
+const crypto = require('crypto');
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    salt: Number,
+    salt: String,
     about: {
         type: String
     },
