@@ -30,24 +30,26 @@ const Header = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
           {!isAuth() && (
-                <NavItem>
-                <NavLink>
-                  <Link href="/login">
-                    <a>Login</a>
-                  </Link>
-                </NavLink>
-              </NavItem>
+                <React.Fragment>
+                  <NavItem>
+                    <NavLink>
+                      <Link href="/login">
+                        <a>Login</a>
+                      </Link>
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink>
+                        <Link href="/signup">
+                          <a>Sign up</a>
+                        </Link>
+                    </NavLink>
+                  </NavItem>
+               </React.Fragment>
           )}
-          {!isAuth() && (
-            <NavItem>
-                <NavLink>
-                  <Link href="/signup">
-                    <a>Sign up</a>
-                  </Link>
-                </NavLink>
-              </NavItem>
-          )}
-            {isAuth() && (
+          {isAuth() && (
+              <React.Fragment>
+              <NavbarText>Hello {(isAuth().name).split(' ')[0]}!</NavbarText>
               <NavItem>
               <NavLink onClick={()=> signout(()=> Router.replace(`/login`))
               }>
@@ -56,9 +58,17 @@ const Header = (props) => {
                 </Link>
               </NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink onClick={()=>(isAuth().role!=1)?Router.replace(`/user`):Router.replace(`/admin`)
+              }>
+                <Link href="/user">
+                  <a>Dashboard</a>
+                </Link>
+              </NavLink>
+            </NavItem>
+            </React.Fragment>
             )}
           </Nav>
-          <NavbarText>Hello Null</NavbarText>
         </Collapse>
       </Navbar>
     </div>
