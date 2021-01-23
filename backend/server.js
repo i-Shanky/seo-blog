@@ -1,14 +1,18 @@
+//Import required modules
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const mongoUtil = require('./mongoUtil');
+//Add environment variables from .env
 require('dotenv').config();
 
 //Routes
 const blogRoutes = require('./routes/blog')
 const authRoutes = require('./routes/auth')
+const userRoutes = require('./routes/user')
+const categoryRoutes = require('./routes/category')
 
 const app = express()
 //Database connection implementation: mongoUtil
@@ -23,6 +27,8 @@ if(process.env.NODE_ENV== 'development') {
 //routes middleware
 app.use('/api',blogRoutes);
 app.use('/api',authRoutes);
+app.use('/api',userRoutes);
+app.use('/api',categoryRoutes);
 
 const port = process.env.port || 8000
 app.listen(port, ()=> {

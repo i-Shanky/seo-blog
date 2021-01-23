@@ -10,7 +10,7 @@ router.get('/signout',signout)
 //test authentication
 router.get('/secret', requireSignin, (req,res)=> {
     res.json({
-        message: 'You have access to secret path'
+        user: req.user
     })
 })
 module.exports = router;
